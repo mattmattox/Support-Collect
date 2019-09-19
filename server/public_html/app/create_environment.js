@@ -4,7 +4,7 @@ $(document).ready(function(){
     $(document).on('click', '#create_environment', function(){
 
         var html = `
-            <h2>Register Environment</h2>
+            <h2>Register Rancher Environment</h2>
             <form id='create_environment_form'>
             	<div class="form-group">
             		<label for="name">Name</label>
