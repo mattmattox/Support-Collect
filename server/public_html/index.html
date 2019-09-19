@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <title>Rancher Support Collect</title>
+
+        <!-- Bootstrap 4 CSS and custom CSS -->
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />-->
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="custom.css" />
+
+    </head>
+<body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a href="/"><img class="logo-image" height="26px" style="padding-right: 5px;" src="/img/rancher-logo-horiz-white.png"></a>
+        <a class="navbar-brand" href="#">Support Collect</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="#" id='home'>Home</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Rancher</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" id='create_environment'>Register Environment</a>
+                    <a class="dropdown-item" href="#">Show Environments</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Capure Logs</a>
+                    <a class="dropdown-item" href="#">Upload Logs</a>
+                  </div>
+                </li>
+                <a class="nav-item nav-link" href="#" id='read_users'>Users</a>
+                <a class="nav-item nav-link" href="#" id='update_account'>Account</a>
+                <a class="nav-item nav-link" href="#" id='logout'>Logout</a>
+                <a class="nav-item nav-link" href="#" id='login'>Login</a>
+                <a class="nav-item nav-link" href="#" id='sign_up'>Sign Up</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /navbar -->
+
+	<!-- container -->
+	<main role="main" class="container starter-template">
+
+		<div class="row">
+			<div class="col">
+
+				<!-- where prompt / messages will appear -->
+				<div id="response"></div>
+
+				<!-- where main content will appear -->
+				<div id="content"></div>
+			</div>
+		</div>
+
+	</main>
+	<!-- /container -->
+
+<!-- jQuery & Bootstrap 4 JavaScript libraries -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- bootbox for confirm pop up -->
+<script src="bootbox.min.js"></script>
+
+<!-- app scripts -->
+<script src="app/login.js"></script>
+<script src="app/logout.js"></script>
+<script src="app/sign_up.js"></script>
+<script src="app/update_account.js"></script>
+<script src="app/app.js"></script>
+<script src="app/create_environment.js"></script>
+
+<!-- users scripts -->
+<script src="app/users/users.js"></script>
+<script src="app/users/read_users.js"></script>
+<script src="app/users/create_user.js"></script>
+<script src="app/users/read_one_user.js"></script>
+<script src="app/users/update_user.js"></script>
+<script src="app/users/delete_user.js"></script>
+<script src="app/users/search_users.js"></script>
+
+<!-- end HTML page -->
+</body>
+</html>

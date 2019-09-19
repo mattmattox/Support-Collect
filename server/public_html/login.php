@@ -6,7 +6,6 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// files needed to connect to database
 include_once 'config/database.php';
 include_once 'objects/user.php';
 
@@ -33,43 +32,41 @@ include_once 'libs/php-jwt-master/src/JWT.php';
 use \Firebase\JWT\JWT;
 
 // check if email exists and if password is correct
-if($email_exists && password_verify($data->password, $user->password)){
+if($email_exists && password_verify($data->password, $user->password))
+{
+  $token = array(
+    "iss" => $iss,
+    "aud" => $aud,
+    "iat" => $iat,
+    "nbf" => $nbf,
+    "data" => array(
+      "id" => $user->id,
+      "firstname" => $user->firstname,
+      "lastname" => $user->lastname,
+      "email" => $user->email
+    )
+  );
 
-    $token = array(
-       "iss" => $iss,
-       "aud" => $aud,
-       "iat" => $iat,
-       "nbf" => $nbf,
-       "data" => array(
-           "id" => $user->id,
-           "firstname" => $user->firstname,
-           "lastname" => $user->lastname,
-           "email" => $user->email,
-           "access_level" => $user->access_level
-       )
-    );
+  // set response code
+  http_response_code(200);
 
-    // set response code
-    http_response_code(200);
-
-    // generate jwt
-    $jwt = JWT::encode($token, $key);
-    echo json_encode(
-            array(
-                "message" => "Successful login.",
-                "jwt" => $jwt
-            )
-        );
-
+  // generate jwt
+  $jwt = JWT::encode($token, $key);
+  echo json_encode(
+    array(
+      "message" => "Successful login.",
+      "jwt" => $jwt
+    )
+  );
 }
 
 // login failed
-else{
-    
-    // set response code
-    http_response_code(401);
+else
+{
+  // set response code
+  http_response_code(401);
 
-    // tell the user login failed
-    echo json_encode(array("message" => "Login failed."));
+  // tell the user login failed
+  echo json_encode(array("message" => "Login failed."));
 }
 ?>
