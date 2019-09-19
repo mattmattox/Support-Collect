@@ -193,23 +193,25 @@ class Environment{
     	return false;
     }
 
-    // check if given endpoint exist in the database
-	function endpointExists(){
+    // check if given environment exist in the database
+	function environmentExists(){
 
-		// query to check if endpoint exists
+		// query to check if environment exists
 		$query = "SELECT id, name, endpoint, accesskey, secretkey
 				FROM " . $this->table_name . "
-				WHERE endpoint = ?
+				WHERE endpoint = ? OR name = ?
 				LIMIT 0,1";
 
 		// prepare the query
 		$stmt = $this->conn->prepare( $query );
 
 		// sanitize
-		$this->endpoint=htmlspecialchars(strip_tags($this->endpoint));
+    $this->endpoint=htmlspecialchars(strip_tags($this->endpoint));
+    $this->name=htmlspecialchars(strip_tags($this->name));
 
 		// bind given endpoint value
-		$stmt->bindParam(1, $this->endpoint);
+    $stmt->bindParam(1, $this->endpoint);
+    $stmt->bindParam(2, $this->name);
 
 		// execute the query
 		$stmt->execute();
@@ -217,7 +219,7 @@ class Environment{
 		// get number of rows
 		$num = $stmt->rowCount();
 
-		// if endpoint exists, assign values to object properties for easy access and use for php sessions
+		// if environment exists, assign values to object properties for easy access and use for php sessions
 		if($num>0){
 
 			// get record details / values
@@ -268,9 +270,7 @@ class Environment{
     if($stmt->execute()){
       return true;
     }
-
       return false;
-    }
 
 }
 ?>

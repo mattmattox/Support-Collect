@@ -27,6 +27,19 @@ $environment->endpoint = isset($data->endpoint) ? $data->endpoint : "";
 $environment->accesskey = isset($data->accesskey) ? $data->accesskey : "";
 $environment->secretkey = isset($data->secretkey) ? $data->secretkey : "";
 
+// Check if environment is already created
+if(
+    $environment->name &&
+    $environment->endpoint &&
+    $environment->environmentExists()
+){
+  // set response code - 400 bad request
+  http_response_code(400);
+
+  // display message: unable to create Environment
+  echo json_encode(array("message" => "Environment already exists."));
+}
+
 // create the Environment
 if(
     $environment->name &&
