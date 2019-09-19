@@ -39,6 +39,7 @@ if(
   // display message: unable to create Environment
   echo json_encode(array("message" => "Environment already exists."));
 }
+else {
 
 // create the Environment
 if(
@@ -64,5 +65,6 @@ else{
 
     // display message: unable to create Environment
     echo json_encode(array("message" => "Unable to create Environment."));
+}
 }
 ?>

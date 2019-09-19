@@ -1,53 +1,53 @@
 $(document).ready(function(){
 
-    $(document).on('click', '.update_user_button', function(){
+    $(document).on('click', '.update_environment_button', function(){
 
-        // user id
+        // environment id
         var id = $(this).attr('data-id');
 
         // validate jwt to verify access
         var jwt = getCookie('jwt');
 
-        $.post("api/user/read_one.php?id=" + id, JSON.stringify({ jwt:jwt })).done(function(result) {
+        $.post("api/environment/read_one.php?id=" + id, JSON.stringify({ jwt:jwt })).done(function(result) {
 
-            var update_user_html=`
+            var update_environment_html=`
                 <div class="row">
                     <div class="col">
-                        <button id='read_users_button' class='btn btn-primary float-right mb-3'>
-                            Read Users
+                        <button id='read_environments_button' class='btn btn-primary float-right mb-3'>
+                            Read environments
                         </button>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <form id='update_user_form' action='#' method='post' border='0'>
+                        <form id='update_environment_form' action='#' method='post' border='0'>
                             <table class='table table-bordered table-hover'>
                                 <tr>
-                                    <td>Firstname</td>
-                                    <td><input type='text' name='firstname' value='` + result.firstname + `' class='form-control' required /></td>
+                                    <td>name</td>
+                                    <td><input type='text' name='name' value='` + result.name + `' class='form-control' required /></td>
                                 </tr>
 
                                 <tr>
-                                    <td>Lastname</td>
-                                    <td><input type='text' name='lastname' value='` + result.lastname + `' class='form-control' required /></td>
+                                    <td>endpoint</td>
+                                    <td><input type='text' name='endpoint' value='` + result.endpoint + `' class='form-control' required /></td>
                                 </tr>
 
                                 <tr>
-                                    <td>Email</td>
-                                    <td><input type='text' name='email' value='` + result.email + `' class='form-control' required /></td>
+                                    <td>accesskey</td>
+                                    <td><input type='text' name='accesskey' value='` + result.accesskey + `' class='form-control' required /></td>
                                 </tr>
 
                                 <tr>
-                                    <td>Password</td>
-                                    <td><input type='password' name='password' class='form-control' /></td>
+                                    <td>Secret Key</td>
+                                    <td><input type='password' name='secretkey' class='form-control' /></td>
                                 </tr>
 
                                 <tr>
                                     <td><input type='hidden' name='id' value='` + result.id + `' required /></td>
                                     <td>
                                         <button type='submit' class='btn btn-primary'>
-                                            Update User
+                                            Update environment
                                         </button>
                                     </td>
                                 </tr>
@@ -58,18 +58,18 @@ $(document).ready(function(){
                 </div>`;
 
             // inject to app
-            $("#content").html(update_user_html);
+            $("#content").html(update_environment_html);
         })
 
         // show login page on error
         .fail(function(result){
             showLoginPage();
-            $('#response').html("<div class='alert alert-danger'>Please login as admin to update user.</div>");
+            $('#response').html("<div class='alert alert-danger'>Please login as admin to update environment.</div>");
         });
 
     });
 
-    $(document).on('submit', '#update_user_form', function(){
+    $(document).on('submit', '#update_environment_form', function(){
 
         // add jwt to object
         var jwt = getCookie('jwt');
@@ -81,18 +81,18 @@ $(document).ready(function(){
 
         // submit form data to api
         $.ajax({
-            url: "api/user/update.php",
+            url: "api/environment/update.php",
             type : "POST",
             contentType : 'application/json',
             data : form_data,
             success : function(result){
-                // user was created, go back to users list
-                showUsersFirstPage();
+                // environment was created, go back to environments list
+                showenvironmentsFirstPage();
             },
             error: function(xhr, resp, text) {
                 console.log(xhr, resp, text);
                 showLoginPage();
-                $('#response').html("<div class='alert alert-danger'>Please login as admin to update a user.</div>");
+                $('#response').html("<div class='alert alert-danger'>Please login as admin to update a environment.</div>");
             }
         });
 

@@ -266,11 +266,12 @@ class Environment{
 		$stmt->bindParam(':accesskey', $this->accesskey);
 		$stmt->bindParam(':secretkey', $this->secretkey);
 
-		// execute the query, also check if query was successful
-    if($stmt->execute()){
-      return true;
-    }
-      return false;
+    // execute the query, also check if query was successful
+        if($stmt->execute()){
+            return true;
+        }
 
+        return false;
+    }
 }
 ?>
