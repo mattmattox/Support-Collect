@@ -27,7 +27,7 @@ do
         OUTPUT="$(curl -s -k https://"$environment_endpoint"/ping)"
         if [ "$OUTPUT" == 'pong' ]
         then
-            if curl -k -u "${environment_accesskey}:${environment_secretkey}" -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' https://"$environment_endpoint"/v3/ > /dev/null
+            if curl -s -k -u "${environment_accesskey}:${environment_secretkey}" -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' https://"$environment_endpoint"/v3/ > /dev/null
             then
               health="Healthy"
             fi
@@ -36,7 +36,7 @@ do
         fi
 
         echo "Updating health status..."
-        curl -s -X GET http://"$URL"/api/environment/healthcheckupdate.php -H "Accept: application/json" -H "Content-Type:application/json" --data-binary \
+        curl -s -X POST http://"$URL"/api/environment/healthcheckupdate.php -H "Accept: application/json" -H "Content-Type:application/json" --data-binary \
         '{"jwt": "'"$TOKEN"'", "id": "'"$environment_id"'"}'
 done
 
