@@ -22,6 +22,16 @@ do
         echo "environment_accesskey:    $environment_accesskey"
         echo "environment_secretkey:    $environment_secretkey"
 
+        echo "Checking ping..."
+        OUTPUT="$(curl -s -k https://"$environment_endpoint"/ping)"
+        if [[ "$OUTPUT" == 'pong']]
+        then
+            echo "Pong"
+            OUTPUT="$(curl -k -u "${environment_accesskey}:${environment_secretkey}" -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' https://"$environment_endpoint"/v3/)"
+            echo "$OUTPUT"
+        else
+            echo "NOK"
+        fi
 done
 
 #done
