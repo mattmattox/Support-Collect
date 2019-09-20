@@ -12,7 +12,8 @@ include_once '../config/core.php';
 // files needed to connect to database
 include_once '../config/database.php';
 include_once '../objects/environment.php';
-include_once '../validate_customer_token.php';
+//include_once '../validate_customer_token.php';
+include_once '../validate_admin_token.php';
 
 // get database connection
 $database = new Database();
