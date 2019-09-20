@@ -193,6 +193,35 @@ class Environment{
     	return false;
     }
 
+    public function healthcheckupdate()
+    {
+      $query = "UPDATE " . $this->table_name . "
+          SET
+            status = :status
+          WHERE id = :id";
+
+      // prepare the query
+      $stmt = $this->conn->prepare($query);
+
+      // sanitize
+      $this->status=htmlspecialchars(strip_tags($this->status));
+      $this->id=htmlspecialchars(strip_tags($this->id));
+
+      // bind the values from the form
+      $stmt->bindParam(':status', $this->status);
+
+      // unique ID of record to be edited
+      $stmt->bindParam(':id', $this->id);
+
+      // execute the query
+      if($stmt->execute()){
+        return true;
+      }
+
+      print_r($stmt->errorInfo());
+      return false;
+    }
+
     // check if given environment exist in the database
 	function environmentExists(){
 
