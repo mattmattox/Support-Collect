@@ -136,7 +136,7 @@ class Environment{
 		$query = "SELECT *
 				FROM " . $this->table_name . "
 				WHERE status='Active'
-				ORDER BY created DESC
+				ORDER BY created ASC
 				LIMIT ?, ?";
 
 		// prepare query statement
