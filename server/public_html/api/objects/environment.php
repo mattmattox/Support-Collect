@@ -199,7 +199,7 @@ class Environment{
       $query = "UPDATE " . $this->table_name . "
           SET
             health = :health,
-            updated = NOW
+            updated = 'CURRENT_TIMESTAMP'
           WHERE id = :id";
 
       // prepare the query
