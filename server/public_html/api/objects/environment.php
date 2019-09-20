@@ -198,7 +198,8 @@ class Environment{
     {
       $query = "UPDATE " . $this->table_name . "
           SET
-            health = :health
+            health = :health,
+            updated = NOW
           WHERE id = :id";
 
       // prepare the query

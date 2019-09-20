@@ -22,31 +22,18 @@ $environment = new Environment($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // set product property values
-$environment->name = isset($data->name) ? $data->name : "";
-$environment->endpoint = isset($data->endpoint) ? $data->endpoint : "";
-$environment->accesskey = isset($data->accesskey) ? $data->accesskey : "";
-$environment->secretkey = isset($data->secretkey) ? $data->secretkey : "";
-
-// Check if environment is already created
-if(
-    $environment->name &&
-    $environment->endpoint &&
-    $environment->environmentExists()
-){
-  // set response code - 400 bad request
-  http_response_code(400);
-
-  // display message: unable to create Environment
-  echo json_encode(array("message" => "Environment already exists."));
-}
-else {
+$environment->firstname = isset($data->firstname) ? $data->firstname : "";
+$environment->lastname = isset($data->lastname) ? $data->lastname : "";
+$environment->email = isset($data->email) ? $data->email : "";
+$environment->password = isset($data->password) ? $data->password : "";
+$environment->access_level = "Customer";
 
 // create the Environment
 if(
-    $environment->name &&
-    $environment->endpoint &&
-    $environment->accesskey &&
-    $environment->secretkey &&
+    $environment->firstname &&
+    $environment->lastname &&
+    $environment->email &&
+    $environment->password &&
     $environment->create()
 ){
 
@@ -65,6 +52,5 @@ else{
 
     // display message: unable to create Environment
     echo json_encode(array("message" => "Unable to create Environment."));
-}
 }
 ?>
