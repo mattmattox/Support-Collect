@@ -11,7 +11,8 @@ class Environment{
 	public $name;
 	public $endpoint;
 	public $accesskey;
-	public $secretkey;
+  public $secretkey;
+  public $health;
 
 	// constructor
     public function __construct($db){
@@ -197,18 +198,18 @@ class Environment{
     {
       $query = "UPDATE " . $this->table_name . "
           SET
-            status = :status
+            health = :health
           WHERE id = :id";
 
       // prepare the query
       $stmt = $this->conn->prepare($query);
 
       // sanitize
-      $this->status=htmlspecialchars(strip_tags($this->status));
+      $this->health=htmlspecialchars(strip_tags($this->health));
       $this->id=htmlspecialchars(strip_tags($this->id));
 
       // bind the values from the form
-      $stmt->bindParam(':status', $this->status);
+      $stmt->bindParam(':health', $this->health);
 
       // unique ID of record to be edited
       $stmt->bindParam(':id', $this->id);

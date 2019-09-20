@@ -25,7 +25,7 @@ $environment = new Environment($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // set product property values
-$environment->status = $data->status;
+$environment->health = $data->health;
 $environment->id = $data->id;
 
 // update the environment

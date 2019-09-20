@@ -23,15 +23,21 @@ do
         echo "environment_secretkey:    $environment_secretkey"
 
         echo "Checking ping..."
+        health="Unknown"
         OUTPUT="$(curl -s -k https://"$environment_endpoint"/ping)"
-        if [[ "$OUTPUT" == 'pong']]
+        if [ "$OUTPUT" == 'pong' ]
         then
-            echo "Pong"
-            OUTPUT="$(curl -k -u "${environment_accesskey}:${environment_secretkey}" -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' https://"$environment_endpoint"/v3/)"
-            echo "$OUTPUT"
+            if curl -k -u "${environment_accesskey}:${environment_secretkey}" -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' https://"$environment_endpoint"/v3/ > /dev/null
+            then
+              health="Healthy"
+            fi
         else
-            echo "NOK"
+            health="Unhealthy"
         fi
+
+        echo "Updating health status..."
+        curl -s -X GET http://"$URL"/api/environment/healthcheckupdate -H "Accept: application/json" -H "Content-Type:application/json" --data-binary \
+        '{"jwt": "'"$TOKEN"'", "id": "'"$environment_id"'"}'
 done
 
 #done
