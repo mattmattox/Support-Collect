@@ -37,7 +37,7 @@ do
 
         echo "Updating health status..."
         curl -s -X POST http://"$URL"/api/environment/healthcheck_update.php -H "Accept: application/json" -H "Content-Type:application/json" --data-binary \
-        '{"jwt": "'"$TOKEN"'", "id": "'"$environment_id"'"}'
+        '{"jwt": "'"$TOKEN"'", "id": "'"$environment_id"'", "health": "'"$health"'"}'
 done
 
 #done
