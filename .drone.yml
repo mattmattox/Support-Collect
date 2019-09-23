@@ -1,7 +1,0 @@
-pipeline:
-  docker-build:
-    image: supportcollect/server
-    dockerfile: ./server/Dockerfile
-    repo: registry.support.tools
-    tags: [ latest, 1.0 ]
-    secrets: [ registry-username, registry-password ]
