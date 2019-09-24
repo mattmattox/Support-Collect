@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: support-collect-server
+  namespace: "support-collect"
+  labels:
+    app: support-collect
+spec:
+  clusterIP: None
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: support-collect
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
