@@ -16,5 +16,6 @@ RUN chmod +x /usr/local/bin/kubectl
 ## Setup run script
 WORKDIR /root
 ADD run.sh /root/run.sh
+RUN chmod +x /root/run.sh
 
 CMD /root/run.sh
