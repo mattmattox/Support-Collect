@@ -3,7 +3,7 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: support-collect-server
-  namespace: "cattle-system"
+  namespace: "support-collect"
   labels:
     app: support-collect-server
 spec:
@@ -26,7 +26,7 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: support-collect-worker
-  namespace: "cattle-system"
+  namespace: "support-collect"
   labels:
     app: support-collect-worker
 spec:
@@ -44,4 +44,3 @@ spec:
       containers:
         - name: worker
           image: cube8021/support-collect:worker-BUILD_NUMBER
-
