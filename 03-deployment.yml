@@ -20,6 +20,6 @@ spec:
       serviceAccountName: support-collect
       containers:
         - name: server
-          image: cube8021/support-collect:server-v0.0
+          image: cube8021/support-collect:server-BUILD_NUMBER
         - name: worker
-          image: cube8021/support-collect:worker-v0.0
+          image: cube8021/support-collect:worker-BUILD_NUMBER
