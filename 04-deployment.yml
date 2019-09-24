@@ -21,6 +21,27 @@ spec:
       containers:
         - name: server
           image: cube8021/support-collect:server-BUILD_NUMBER
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            successThreshold: 2
+            timeoutSeconds: 2
+
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
