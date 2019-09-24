@@ -60,5 +60,6 @@ WORKDIR /var/www/public_html
 ADD public_html /var/www/public_html
 
 COPY run.sh /bin/run.sh
+RUN chmod +x /bin/run.sh
 CMD /bin/run.sh
 
