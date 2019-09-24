@@ -1,9 +1,9 @@
 #!/bin/bash
 
-URL="localhost"
+URL="server"
 
-#while true
-#do
+while true
+do
 
 TOKEN="$(curl -s -X POST -H "Content-Type: application/json" -d '{"email":"rancher@labs", "password":"rancher@labs"}' http://"$URL"/api/login.php | jq .jwt  | tr -d '"')"
 echo "Token: $TOKEN"
@@ -39,5 +39,6 @@ do
         curl -s -X POST http://"$URL"/api/environment/healthcheck_update.php -H "Accept: application/json" -H "Content-Type:application/json" --data-binary \
         '{"jwt": "'"$TOKEN"'", "id": "'"$environment_id"'", "health": "'"$health"'"}'
 done
+sleep 60
 
-#done
+done
