@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: support-collect-server
+  namespace: "support-collect"
+  labels:
+    app: support-collect-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: support-collect-server
+  template:
+    metadata:
+      labels:
+        app: support-collect-server
+      annotations:
+    spec:
+      serviceAccountName: support-collect
+      containers:
+        - name: server
+          image: cube8021/support-collect:server-BUILD_NUMBER
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: support-collect-worker
+  namespace: "support-collect"
+  labels:
+    app: support-collect-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: support-collect-worker
+  template:
+    metadata:
+      labels:
+        app: support-collect-worker
+      annotations:
+    spec:
+      serviceAccountName: support-collect
+      containers:
+        - name: worker
+          image: cube8021/support-collect:worker-BUILD_NUMBER
