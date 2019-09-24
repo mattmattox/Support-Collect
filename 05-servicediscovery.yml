@@ -1,8 +1,8 @@
 ---
 apiVersion: apps/v1beta1
-kind: Deployment
+kind: Service
 metadata:
-  name: support-collect-server
+  name: support-collect
   namespace: "support-collect"
   labels:
     app: support-collect
