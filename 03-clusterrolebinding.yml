@@ -3,7 +3,7 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
   name: support-collect
-  namespace: "support-collect"
+  namespace: "support-system"
   labels:
     app: support-collect
 ---
@@ -14,7 +14,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: support-collect
-  namespace: support-collect
+  namespace: support-system
 roleRef:
   kind: ClusterRole
   name: cluster-admin

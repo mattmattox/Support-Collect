@@ -2,8 +2,8 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: support-collect-server
-  namespace: "support-collect"
+  name: support-collect
+  namespace: "support-system"
   labels:
     app: support-collect-server
 spec:
@@ -46,8 +46,8 @@ spec:
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: support-collect-worker
-  namespace: "support-collect"
+  name: worker
+  namespace: "support-system"
   labels:
     app: support-collect-worker
 spec:
