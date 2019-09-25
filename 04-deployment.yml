@@ -11,6 +11,8 @@ spec:
   selector:
     matchLabels:
       app: support-collect-database
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -19,6 +21,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: MARIADB_ROOT_HOST
+          value: '%'
         - name: MARIADB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
