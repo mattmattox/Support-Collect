@@ -2,6 +2,29 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
+  name: database
+  namespace: "support-system"
+  labels:
+    app: support-collect-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: support-collect-database
+  template:
+    metadata:
+      labels:
+        app: support-collect-database
+      annotations:
+    spec:
+      containers:
+        - name: server
+          image: mariadb/server:10.3
+
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
   name: support-collect
   namespace: "support-system"
   labels:
