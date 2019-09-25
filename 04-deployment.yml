@@ -49,9 +49,9 @@ spec:
         - mountPath: /var/lib/mysql
           name: support-collect
           subPath: data
-        volumes:
-        - name: support-collect
-          persistentVolumeClaim:
+      volumes:
+      - name: support-collect
+        persistentVolumeClaim:
           claimName: support-collect
 
 ---
