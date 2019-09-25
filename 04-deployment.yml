@@ -77,30 +77,50 @@ spec:
         app: support-collect-server
       annotations:
     spec:
-      serviceAccountName: support-collect
       containers:
-        - name: server
-          image: cube8021/support-collect:server-BUILD_NUMBER
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /
-              port: 80
-              scheme: HTTP
-            initialDelaySeconds: 10
-            periodSeconds: 2
-            successThreshold: 1
-            timeoutSeconds: 2
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /
-              port: 80
-              scheme: HTTP
-            initialDelaySeconds: 10
-            periodSeconds: 2
-            successThreshold: 2
-            timeoutSeconds: 2
+      - env:
+        - name: MYSQL_HOST
+          value: 'support-database'
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              key: MYSQL_USER
+              name: mysql-secret
+              optional: false
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: MYSQL_PASSWORD
+              name: mysql-secret
+              optional: false
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: MYSQL_DATABASE
+              name: mysql-secret
+              optional: false
+        image: cube8021/support-collect:server-BUILD_NUMBER
+        name: server
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 2
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 2
+          successThreshold: 2
+          timeoutSeconds: 2
 
 ---
 apiVersion: apps/v1beta1
