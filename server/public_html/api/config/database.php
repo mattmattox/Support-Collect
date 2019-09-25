@@ -3,10 +3,10 @@
 class Database{
 
 	// specify your own database credentials
-	private $host = "localhost";
-	private $db_name = "supportcollect";
-	private $username = "supportcollect";
-	private $password = "supportcollect";
+	private $host = getenv("MYSQL_HOST");
+	private $db_name = getenv("MYSQL_DATABASE");
+	private $username = getenv("MYSQL_USER");
+	private $password = getenv("MYSQL_PASSWORD");
 	public $conn;
 
 	// get the database connection
