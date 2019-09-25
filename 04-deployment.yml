@@ -21,33 +21,33 @@ spec:
     spec:
       containers:
       - env:
-        - name: MARIADB_ROOT_HOST
+        - name: MYSQL_ROOT_HOST
           value: '%'
-        - name: MARIADB_ROOT_PASSWORD
+        - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               key: MYSQL_ROOT_PASSWORD
               name: mysql-secret
               optional: false
-        - name: MARIADB_USER
+        - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
               key: MYSQL_USER
               name: mysql-secret
               optional: false
-        - name: MARIADB_PASSWORD
+        - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
               key: MYSQL_PASSWORD
               name: mysql-secret
               optional: false
-        - name: MARIADB_DATABASE
+        - name: MYSQL_DATABASE
           valueFrom:
             secretKeyRef:
               key: MYSQL_DATABASE
               name: mysql-secret
               optional: false
-        image: mariadb/server:10.3
+        image: mysql/mysql-server:5.7
         name: database
         volumeMounts:
         - mountPath: /var/lib/mysql
