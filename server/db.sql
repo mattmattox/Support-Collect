@@ -1,6 +1,0 @@
-CREATE DATABASE [IF NOT EXISTS] `supportcollect`;
-CREATE USER 'supportcollect'@'localhost' IDENTIFIED VIA mysql_native_password USING 'supportcollect';
-GRANT ALL PRIVILEGES ON *.* TO 'supportcollect'@'localhost' REQUIRE NONE WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
-GRANT ALL PRIVILEGES ON `supportcollect`.* TO 'supportcollect'@'localhost';
-USE `supportcollect`;
-CREATE TABLE `supportcollect`.`users` ( `id` INT NOT NULL AUTO_INCREMENT , `firstname` VARCHAR(256) NOT NULL , `lastname` VARCHAR(256) NOT NULL , `email` VARCHAR(256) NOT NULL , `password` VARCHAR(2048) NOT NULL , `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `modified` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
