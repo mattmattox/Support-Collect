@@ -1,5 +1,5 @@
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: database
@@ -18,37 +18,37 @@ spec:
       annotations:
     spec:
       containers:
-        - name: database
-          image: mariadb/server:10.3
-        - env:
-          - name: MARIADB_ROOT_PASSWORD
-            valueFrom:
+      - env:
+        - name: MARIADB_ROOT_PASSWORD
+          valueFrom:
+          secretKeyRef:
+            key: MYSQL_ROOT_PASSWORD
+            name: mysql-secret
+        - name: MARIADB_USER
+          valueFrom:
             secretKeyRef:
-              key: MYSQL_ROOT_PASSWORD
+              key: MYSQL_USER
               name: mysql-secret
-          - name: MARIADB_USER
-            valueFrom:
-              secretKeyRef:
-                key: MYSQL_USER
-                name: mysql-secret
-          - name: MARIADB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                key: MYSQL_PASSWORD
-                name: mysql-secret
-          - name: MARIADB_DATABASE
-            valueFrom:
-              secretKeyRef:
-                key: MYSQL_DATABASE
-                name: mysql-secret
-          volumeMounts:
-          - mountPath: /var/lib/mysql
-            name: support-collect
-            subPath: data
-          volumes:
-          - name: support-collect
-            persistentVolumeClaim:
-            claimName: support-collect
+        - name: MARIADB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: MYSQL_PASSWORD
+              name: mysql-secret
+        - name: MARIADB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: MYSQL_DATABASE
+              name: mysql-secret
+        image: mariadb/server:10.3
+        name: database
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: support-collect
+          subPath: data
+        volumes:
+        - name: support-collect
+          persistentVolumeClaim:
+          claimName: support-collect
 
 ---
 apiVersion: apps/v1beta1
