@@ -1,6 +1,6 @@
 #!/bin/bash
 
-URL="server"
+URL="support-collect-server"
 
 while true
 do
