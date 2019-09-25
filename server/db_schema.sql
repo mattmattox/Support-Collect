@@ -96,6 +96,7 @@ CREATE TABLE `nodes` (
   `role_etcd` varchar(256) NOT NULL,
   `role_control` varchar(256) NOT NULL,
   `role_worker` varchar(256) NOT NULL,
+  `health` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
